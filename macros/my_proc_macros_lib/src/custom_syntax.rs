@@ -21,6 +21,7 @@
 #![allow(unused_macros)]
 
 use core::panic;
+use std::fmt::{self, format};
 
 use quote::{quote, ToTokens};
 use syn::{parse::{Parse, ParseBuffer, ParseStream},
@@ -49,7 +50,7 @@ pub fn fn_proc_macro_impl(input: proc_macro::TokenStream) -> proc_macro::TokenSt
   // dbg!(&input);
 
   let manager_of_thing_info = parse_macro_input!(input as ManagerOfThingInfo);
-  // dbg!(&manager_of_thing_info);
+  dbg!(&manager_of_thing_info);
 
   let ManagerOfThingInfo {
     manager_name_ident,
@@ -87,13 +88,26 @@ pub fn fn_proc_macro_impl(input: proc_macro::TokenStream) -> proc_macro::TokenSt
 ///   for std::collections::HashMap<K, V>
 /// }
 /// ```
-#[derive(Debug)]
 struct ManagerOfThingInfo {
   manager_name_ident: Ident,
   manager_ty: Type,
   manager_ty_generic_args: Option<Punctuated<GenericArgument, Comma>>,
   where_clause: Option<WhereClause>,
   thing_ty: Type,
+}
+
+impl fmt::Debug for ManagerOfThingInfo {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.write_str(
+            &format!("manager_name_ident: {} \n
+                mantager_ty: {}", 
+                &self.manager_name_ident.to_string(),
+                &self.manager_ty.to_token_stream().to_string(),
+            )
+        )
+
+    }
+
 }
 
 /// [Parse docs](https://docs.rs/syn/latest/syn/parse/index.html)

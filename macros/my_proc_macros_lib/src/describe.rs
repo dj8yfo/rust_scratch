@@ -44,8 +44,8 @@ pub fn derive_proc_macro_impl(input: TokenStream) -> TokenStream {
   };
 
   quote! {
-    impl #generics #struct_name_ident #generics #where_clause {
-      fn describe(&self) -> String {
+    impl #generics Describe for #struct_name_ident #generics #where_clause {
+      fn describe() -> String {
         let mut string = String::from(stringify!(#struct_name_ident));
         string.push_str(" is ");
         string.push_str(#description_str);
@@ -71,8 +71,7 @@ fn gen_description_str_for_struct(my_struct: DataStruct) -> String {
 fn handle_named_fields(fields: FieldsNamed) -> String {
   let my_named_field_idents = fields
     .named
-    .iter()
-    .map(|it| &it.ident);
+    .iter();
   format!(
     "a struct with these named fields: {}",
     quote! {#(#my_named_field_idents), *}

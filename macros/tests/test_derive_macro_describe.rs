@@ -29,6 +29,10 @@
 
 use my_proc_macros_lib::Describe;
 
+trait Describe {
+    fn describe() -> String;
+}
+
 #[test]
 fn test_proc_macro() {
   #[derive(Describe)]
@@ -43,12 +47,7 @@ fn test_proc_macro() {
     MyVariant1,
   }
 
-  let foo = MyStruct {
-    my_string: "Hello".to_string(),
-    my_enum: MyEnum::MyVariant1,
-    my_number: 42,
-  };
-  let foo = foo.describe();
+  let foo = MyStruct::describe();
   assert_eq!(
     foo,
     "MyStruct is a struct with these named fields: my_string, my_enum, my_number"
@@ -67,12 +66,8 @@ fn test_proc_macro_generics() {
     y: Y,
   }
 
-  let my_pt: Point<i32, i32> = Point {
-    x: 1 as i32,
-    y: 2 as i32,
-  };
   assert_eq!(
-    my_pt.describe(),
+    Point::<i32, i32>::describe(),
     "Point is a struct with these named fields: x, y"
   );
 }

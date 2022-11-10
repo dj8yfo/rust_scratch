@@ -35,7 +35,7 @@ use my_proc_macros_lib::{attrib_macro_logger_1, attrib_macro_logger_2};
 fn test_attribute_macro_logger_1() {
   #[attrib_macro_logger_1(key = "value")]
   fn this_fn_will_be_consumed_and_replaced() -> i32 { 42 }
-  assert_eq!(key(), "value");
+  assert_eq!(this_fn_will_be_consumed_and_replacedkey(), "value");
 }
 
 #[test]

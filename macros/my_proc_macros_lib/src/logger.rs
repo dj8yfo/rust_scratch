@@ -55,7 +55,7 @@ pub fn attrib_proc_macro_impl_1(
     style_prompt(&value),
   );
 
-  let fn_ident = item.sig.ident.from_string(&key);
+  let fn_ident = item.sig.ident.from_string(&format!("{{}}{}", &key));
 
   quote! {
     fn #fn_ident() -> &'static str {

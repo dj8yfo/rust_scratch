@@ -1,0 +1,3 @@
+let l:bm_file_version = 1
+let l:bm_sessions = {'default': {'/home/jerryminion/Documents/code/study/rust/rust_scratch/macros/tests/test_fn_macro_custom_syntax.rs': [{'sign_idx': 9500, 'line_nr': 62, 'content': '  fn_macro_custom_syntax! {'},],'/home/jerryminion/Documents/code/study/rust/rust_scratch/macros/my_proc_macros_lib/src/utils/type_ext.rs': [{'sign_idx': 9501, 'line_nr': 35, 'content': 'impl TypeExt for syn::Type {'},],}}
+let l:bm_current_session = 'default'
